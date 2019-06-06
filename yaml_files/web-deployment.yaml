@@ -1,0 +1,55 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: web
+  name: web
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: web
+    spec:
+      containers:
+      - args:
+        - bash
+        - entrypoint.sh
+        env:
+        - name: ALLOW_OVERRIDE
+          value: "true"
+        - name: OBVIUS_HTTPS_PREFIX
+          value: cms.secure.
+        - name: OBVIUS_HTTP_PREFIX
+          value: http
+        - name: OBVIUS_ROOT_DOMAIN
+          value: cmstest04.ku.dk
+        - name: WAIT_FOR_DB_TIMER
+          value: "11"
+        image: gcr.io/emil-242911/web-obvius:0.1
+        name: web
+        ports:
+        - containerPort: 80
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/www/www.ku.dk/logs
+          name: logs
+        - mountPath: /var/www/www.ku.dk/docs/upload
+          name: uploaddata
+      hostname: web
+      restartPolicy: Always
+      volumes:
+      - name: logs
+        persistentVolumeClaim:
+          claimName: logs
+      - name: uploaddata
+        persistentVolumeClaim:
+          claimName: uploaddata
+status: {}
