@@ -1,0 +1,11 @@
+{
+  "base_url": "gcr.io/emil-242911/",
+  "catalog_url":"dockerreg.magenta.dk/v2/",
+  "tag_list_uri": "/tags/list",
+  "images": {
+    "reverse_proxy": {
+      "directory": "./apache",
+      "uri": "apache"
+    }
+  }
+}
