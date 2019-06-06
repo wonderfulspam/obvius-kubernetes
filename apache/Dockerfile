@@ -1,5 +1,8 @@
-FROM httpd:2.4
-COPY ku_docker.conf /usr/local/apache2/conf/ku_docker.conf
+FROM debian:stable-slim
+
+RUN apt-get update && apt-get install apache2 -y
+
+COPY ku_docker.conf /etc/apache2/sites-available/ku_docker.conf
 COPY certificates/* /etc/apache2/certificates/
 
 RUN a2enmod headers
