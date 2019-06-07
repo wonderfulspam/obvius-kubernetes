@@ -9,10 +9,9 @@ metadata:
     io.kompose.service: web
   name: web
 spec:
-  type: LoadBalancer
   ports:
-  - name: "8080"
-    port: 8080
+  - name: "default"
+    port: 80
     targetPort: 80
   selector:
     io.kompose.service: web
