@@ -18,10 +18,12 @@ spec:
         io.kompose.service: solr
     spec:
       containers:
-      - image: solr
+              #- image: gcr.io/emil-242911/solr:0.2
+      - image: solr:latest
         name: solr
         ports:
-        - containerPort: 8983
+        - name: solr-port
+          containerPort: 8983
         resources: {}
       hostname: solr
       restartPolicy: Always
