@@ -6,14 +6,21 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: web
-  name: web
+    io.kompose.service: apache
+  name: apache
 spec:
+  type: LoadBalancer
   ports:
   - name: "default"
     port: 80
     targetPort: 80
+  - name: "secure"
+    port: 443
+    targetPort: 443
+  - name: "solr"
+    port: 8983
+    targetPort: 8983
   selector:
-    io.kompose.service: web
+    io.kompose.service: apache
 status:
   loadBalancer: {}
